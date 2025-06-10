@@ -9,7 +9,7 @@ We then had the brilliant(read: stupid) idea of making a device that pointed at 
 
 **Design**
 This is structured like any 2 axis pan/tilt mechanism, with the blue mini steppers. We did consider using servoes but honestly, we were so bored of using servoes that we decided to use these instead<br>
-We also made a small carrier board for the ESP and the motor drivers, along with power delivery<br>
+We also made a small carrier board for the ESP and the motor drivers, along with an OLED and MPU mounting point<br>
 
 ![model of gimbal](Assets/model.png)<br>
 ![model of pcb](Assets/PCB.png)<br>
