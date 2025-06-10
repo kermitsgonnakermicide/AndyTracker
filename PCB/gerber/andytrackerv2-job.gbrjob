@@ -3,19 +3,19 @@
     "GenerationSoftware": {
       "Vendor": "KiCad",
       "Application": "Pcbnew",
-      "Version": "9.0.2"
+      "Version": "9.0.0"
     },
-    "CreationDate": "2025-06-04T23:15:31+05:30"
+    "CreationDate": "2025-06-10T19:10:25+05:30"
   },
   "GeneralSpecs": {
     "ProjectId": {
-      "Name": "andytrackerPCB",
-      "GUID": "616e6479-7472-4616-936b-65725043422e",
+      "Name": "andytrackerv2",
+      "GUID": "616e6479-7472-4616-936b-657276322e6b",
       "Revision": "rev?"
     },
     "Size": {
-      "X": 50.05,
-      "Y": 62.55
+      "X": 40.05,
+      "Y": 45.55
     },
     "LayerNumber": 2,
     "BoardThickness": 1.6,
@@ -32,47 +32,47 @@
   ],
   "FilesAttributes": [
     {
-      "Path": "andytrackerPCB-F_Cu.gbr",
+      "Path": "andytrackerv2-F_Cu.gbr",
       "FileFunction": "Copper,L1,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "andytrackerPCB-B_Cu.gbr",
+      "Path": "andytrackerv2-B_Cu.gbr",
       "FileFunction": "Copper,L2,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "andytrackerPCB-F_Paste.gbr",
+      "Path": "andytrackerv2-F_Paste.gbr",
       "FileFunction": "SolderPaste,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "andytrackerPCB-B_Paste.gbr",
+      "Path": "andytrackerv2-B_Paste.gbr",
       "FileFunction": "SolderPaste,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "andytrackerPCB-F_Silkscreen.gbr",
+      "Path": "andytrackerv2-F_Silkscreen.gbr",
       "FileFunction": "Legend,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "andytrackerPCB-B_Silkscreen.gbr",
+      "Path": "andytrackerv2-B_Silkscreen.gbr",
       "FileFunction": "Legend,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "andytrackerPCB-F_Mask.gbr",
+      "Path": "andytrackerv2-F_Mask.gbr",
       "FileFunction": "SolderMask,Top",
       "FilePolarity": "Negative"
     },
     {
-      "Path": "andytrackerPCB-B_Mask.gbr",
+      "Path": "andytrackerv2-B_Mask.gbr",
       "FileFunction": "SolderMask,Bot",
       "FilePolarity": "Negative"
     },
     {
-      "Path": "andytrackerPCB-Edge_Cuts.gbr",
+      "Path": "andytrackerv2-Edge_Cuts.gbr",
       "FileFunction": "Profile",
       "FilePolarity": "Positive"
     }

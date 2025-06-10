@@ -3,11 +3,11 @@
 #include <ArduinoJson.h>
 #include <AccelStepper.h>
 
-const char* ssid = "";
-const char* password = "";
-const char* token = "Bearer token";
+const char *ssid = "YOUR_WIFI_SSID";
+const char *password = "YOUR_WIFI_PASSWORD";
+const char *token = "Bearer YOUR_TRACCAR_API_TOKEN";
 
-
+// Stepper pins (change if needed)
 #define STEPPER1_PIN1 14
 #define STEPPER1_PIN2 27
 #define STEPPER1_PIN3 26
@@ -21,12 +21,14 @@ const char* token = "Bearer token";
 AccelStepper stepperAzimuth(AccelStepper::HALF4WIRE, STEPPER1_PIN1, STEPPER1_PIN3, STEPPER1_PIN2, STEPPER1_PIN4);
 AccelStepper stepperElevation(AccelStepper::HALF4WIRE, STEPPER2_PIN1, STEPPER2_PIN3, STEPPER2_PIN2, STEPPER2_PIN4);
 
-
-float myLat = 28.6139;   
+// Your fixed location
+float myLat = 28.6139; // Example: New Delhi
 float myLon = 77.2090;
-float myAlt = 220;       
+float myAlt = 220; // meters
 
-float calculateAzimuth(float lat1, float lon1, float lat2, float lon2) {
+// Function to compute azimuth in degrees
+float calculateAzimuth(float lat1, float lon1, float lat2, float lon2)
+{
   float dLon = radians(lon2 - lon1);
   lat1 = radians(lat1);
   lat2 = radians(lat2);
@@ -37,13 +39,17 @@ float calculateAzimuth(float lat1, float lon1, float lat2, float lon2) {
   return fmod((degrees(bearing) + 360), 360);
 }
 
-float calculateElevation(float lat1, float lon1, float alt1, float lat2, float lon2, float alt2) {
+// Function to compute elevation angle in degrees
+float calculateElevation(float lat1, float lon1, float alt1, float lat2, float lon2, float alt2)
+{
   float R = 6371000; // Earth radius in meters
+
+  // Haversine distance
   float dLat = radians(lat2 - lat1);
   float dLon = radians(lon2 - lon1);
   float a = sin(dLat / 2) * sin(dLat / 2) +
             cos(radians(lat1)) * cos(radians(lat2)) *
-            sin(dLon / 2) * sin(dLon / 2);
+                sin(dLon / 2) * sin(dLon / 2);
   float c = 2 * atan2(sqrt(a), sqrt(1 - a));
   float horizontalDistance = R * c;
 
@@ -51,16 +57,20 @@ float calculateElevation(float lat1, float lon1, float alt1, float lat2, float l
   return degrees(atan2(verticalDifference, horizontalDistance));
 }
 
-int degreesToSteps(float degrees) {
-  return int(degrees * 2048.0 / 360.0); 
+// Map degrees to stepper steps (adjust ratio as needed)
+int degreesToSteps(float degrees)
+{
+  return int(degrees * 2048.0 / 360.0); // 2048 steps/rev for 28BYJ-48 in half-step
 }
 
-void setup() {
+void setup()
+{
   Serial.begin(115200);
 
   WiFi.begin(ssid, password);
   Serial.print("Connecting to Wi-Fi");
-  while (WiFi.status() != WL_CONNECTED) {
+  while (WiFi.status() != WL_CONNECTED)
+  {
     delay(500);
     Serial.print(".");
   }
@@ -71,7 +81,8 @@ void setup() {
   http.addHeader("Authorization", token);
 
   int httpCode = http.GET();
-  if (httpCode != 200) {
+  if (httpCode != 200)
+  {
     Serial.printf("Device fetch failed: %d\n", httpCode);
     return;
   }
@@ -83,24 +94,29 @@ void setup() {
   deserializeJson(doc, payload);
 
   int deviceId = -1;
-  for (JsonObject d : doc.as<JsonArray>()) {
-    if (d["name"] == "andyphone") {
+  for (JsonObject d : doc.as<JsonArray>())
+  {
+    if (d["name"] == "andyphone")
+    {
       deviceId = d["id"];
       break;
     }
   }
 
-  if (deviceId == -1) {
+  if (deviceId == -1)
+  {
     Serial.println("andyphone not found.");
     return;
   }
 
+  // Get positions
   String url = "https://demo.traccar.org/api/positions?deviceId=" + String(deviceId);
   http.begin(url);
   http.addHeader("Authorization", token);
   httpCode = http.GET();
 
-  if (httpCode != 200) {
+  if (httpCode != 200)
+  {
     Serial.printf("Position fetch failed: %d\n", httpCode);
     return;
   }
@@ -111,143 +127,32 @@ void setup() {
   DynamicJsonDocument posDoc(2048);
   deserializeJson(posDoc, posPayload);
 
-  if (posDoc.size() == 0) {
+  if (posDoc.size() == 0)
+  {
     Serial.println("No position data.");
     return;
   }
 
   float targetLat = posDoc[0]["latitude"];
   float targetLon = posDoc[0]["longitude"];
-  float targetAlt = posDoc[0]["altitude"] | 0; //wtf
+  float targetAlt = posDoc[0]["altitude"] | 0; // fallback if missing
 
   Serial.printf("Target: Lat=%.6f Lon=%.6f Alt=%.2f\n", targetLat, targetLon, targetAlt);
 
   float az = calculateAzimuth(myLat, myLon, targetLat, targetLon);
-  float el = calculateElevation(myLat, myLon 88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-#include <WiFi.h>
-  float dLon = radians(lon2 - lon1);
-  float a = sin(dLat / 2) * sin(dLat / 2) +
-            cos(radians(lat1)) * cos(radians(lat2)) *
-            sin(dLon / 2) * sin(dLon / 2);
-  float c = 2 * atan2(sqrt(a), sqrt(1 - a));
-  float horizontalDistance = R * c;
-
-  float verticalDifference = alt2 - alt1;
-  return degrees(atan2(verticalDifference, horizontalDistance));
-}
-
-// Map degrees to stepper steps (adjust ratio as needed)
-int degreesToSteps(float degrees) {
-  return int(degrees * 2048.0 / 360.0);  // 2048 steps/rev for 28BYJ-48 in half-step
-}
-
-void setup() {
-  Serial.begin(115200);
-
-  WiFi.begin(ssid, password);
-  Serial.print("Connecting to Wi-Fi");
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-  Serial.println(" connected!");
-
-  HTTPClient http;
-  http.begin("https://demo.traccar.org/api/devices");
-  http.addHeader("Authorization", token);
-
-  int httpCode = http.GET();
-  if (httpCode != 200) {
-    Serial.printf("Device fetch failed: %d\n", httpCode);
-    return;
-  }
-
-  String payload = http.getString();
-  http.end();
-
-  DynamicJsonDocument doc(4096);
-  deserializeJson(doc, payload);
-
-  int deviceId = -1;
-  for (JsonObject d : doc.as<JsonArray>()) {
-    if (d["name"] == "andyphone") {
-      deviceId = d["id"];
-      break;
-    }
-  }
-
-  if (deviceId == -1) {
-    Serial.println("andyphone not found.");
-    return;
-  }
-
-  // Get positions
-  String url = "htt, myAlt, targetLat, targetLon, targetAlt);
+  float el = calculateElevation(myLat, myLon, myAlt, targetLat, targetLon, targetAlt);
 
   Serial.printf("Azimuth: %.2f°, Elevation: %.2f°\n", az, el);
 
   stepperAzimuth.setMaxSpeed(500);
   stepperElevation.setMaxSpeed(500);
- 
+
   stepperAzimuth.moveTo(degreesToSteps(az));
   stepperElevation.moveTo(degreesToSteps(el));
 }
 
-void loop() {
+void loop()
+{
   stepperAzimuth.run();
   stepperElevation.run();
 }
-
