@@ -27,3 +27,8 @@ Apart from that, I spent a long time looking into using nema-17s or servo motors
 forgot about this and just worked on readme today, along with shipping the project yay!!! <br>
 also @ttf-fog kinda dissapeared on vacaction lmao so this isnt a grp project anymore xD<br>
 **Time Spent: 1hr**<br>
+
+# June 10th - Pt2
+
+Redesigned the entire PCB for the xiao esp32<br>
+Pretty much nothing else, as the xiao was chosen due to its 10x reliability( recently had a week-long traumatic experience with a esp32 devkit)
