@@ -14,7 +14,10 @@ I built this in Fusion360<br>
 
 I began work on the PCB - this PCB was supposed to be pretty straightforward w/ the a4988 module but I believe the ULN2003 module is a better choice for us - as it has a neat little point for us to plug in our stepper cable<br>
 I'm also adding another thing - a GPS module which would let me just place this thing anywhere and have it point at Andy sir<br>
-@ttf-fog is currently working on the code for this, and it should be ready by tommorrow - we setup his tracking with Traccar, which provides an easy to use api which gives his longitude and latitude (straight up)
+@ttf-fog is currently working on the code for this, and it should be ready by tommorrow - we setup his tracking with Traccar, which provides an easy to use api which gives his longitude and latitude (straight up)<br>
+
+Here is an example of the traccar page<br>
+![alt text](Assets/traccar.png)<br>
 **Time Spent: 4.5hrs**<br>
 
 # June 5th: Updated PCB and 3D Scan
